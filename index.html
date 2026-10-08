@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#ffffff">
+<meta name="robots" content="noindex">
+<title>Express Tech Design Center</title>
+<meta name="description" content="Live progress of your Express Tech installation: drawings, points and configuration.">
+<meta property="og:site_name" content="Express Tech">
+<meta property="og:title" content="Express Tech Design Center">
+<meta property="og:description" content="Live progress of your installation: drawings, points and configuration.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://design.expresskw.com/">
+<meta property="og:image" content="https://design.expresskw.com/og-image.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Express Tech">
+<link rel="apple-touch-icon" href="site-touch-icon.png">
+<link rel="icon" href="site-icon-192.png">
+<script>
+  // iPhone saves the home-screen app with the full link; Android/Chrome needs the manifest to install
+  if (!(/iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1))){
+    var mf = document.createElement("link"); mf.rel = "manifest"; mf.href = "site.webmanifest"; document.head.appendChild(mf);
+  }
+</script>
+<style>
+  :root{ --bg:#f4f4f5; --text:#2b2b2b; --muted:#7c7c7c; }
+  @media (prefers-color-scheme: dark){ :root{ --bg:#111111; --text:#efefef; --muted:#9d9d9d; } }
+  html, body{ margin:0; height:100%; background:var(--bg); color:var(--text); font:15px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; }
+  iframe{ position:fixed; inset:0; width:100%; height:100%; border:0; display:block; background:var(--bg); }
+  .home{ min-height:100%; display:grid; place-items:center; padding:24px; box-sizing:border-box; text-align:center; }
+  .home img{ width:min(300px, 78vw); height:auto; }
+  .home h1{ margin:26px 0 10px; font-size:12px; letter-spacing:.3em; text-transform:uppercase; color:#808080; font-weight:600; }
+  .home p{ margin:0 auto; max-width:330px; color:var(--muted); }
+  .stripe{ position:fixed; left:0; right:0; bottom:0; height:6px; background:linear-gradient(90deg,#FF0D07 0 64%,#808080 64% 86%,#B2B2B3 86%); }
+</style>
+</head>
+<body>
+<script>
+  // Express Tech Design Center: design.expresskw.com/#<project>-<view key> opens that project's live progress
+  var APP = "https://thegamer998-ctrl.github.io/lv-planner/site.html";
+  var SERVER = "https://expresstech.hussaink-060.workers.dev";
+  var code = decodeURIComponent(location.hash.slice(1) || "").trim(), m = code.match(/^([A-Za-z0-9]{6,32})-([A-Za-z0-9]{8,64})$/);
+  try { if (m) localStorage.setItem("et_dc_code", code); else if (!code){ var last = localStorage.getItem("et_dc_code"); if (last){ m = last.match(/^([A-Za-z0-9]{6,32})-([A-Za-z0-9]{8,64})$/); if (m) history.replaceState(null, "", "#" + last); } } } catch(e){}
+  window.addEventListener("hashchange", function(){ location.reload(); });
+  if (m){
+    var f = document.createElement("iframe");
+    f.src = APP + "#p=" + m[1] + "&k=" + m[2] + "&s=" + encodeURIComponent(SERVER);
+    f.title = "Express Tech Design Center"; f.allow = "fullscreen";
+    document.body.appendChild(f);
+  } else {
+    document.body.insertAdjacentHTML("beforeend", '<div class="home"><div><img src="brand-logo.png" alt="Express Tech — We help you grow"><h1>Design Center</h1><p>Open the project link Express Tech sent you to see your installation progress.</p></div></div><div class="stripe"></div>');
+  }
+</script>
+</body>
+</html>
